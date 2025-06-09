@@ -1,4 +1,3 @@
-
 import { MapPin, Phone, Mail, Clock, MessageCircle } from 'lucide-react';
 
 const Contact = () => {
@@ -30,8 +29,8 @@ const Contact = () => {
                   <div>
                     <h4 className="font-semibold text-burgundy-900">Address</h4>
                     <p className="text-gray-600">
-                      Boudha Stupa Road, Ward No. 6<br />
-                      Kathmandu, Nepal 44600
+                      Kunphen Marg, Chhetrapati<br />
+                      Kathmandu, Nepal
                     </p>
                   </div>
                 </div>
