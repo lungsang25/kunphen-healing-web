@@ -1,4 +1,3 @@
-
 import { Heart, Phone, Mail, MapPin } from 'lucide-react';
 
 const Footer = () => {
@@ -8,8 +7,12 @@ const Footer = () => {
         <div className="grid lg:grid-cols-4 gap-8">
           <div className="lg:col-span-2">
             <div className="flex items-center space-x-3 mb-6">
-              <div className="w-12 h-12 bg-gradient-to-br from-golden-400 to-golden-600 rounded-full flex items-center justify-center">
-                <span className="text-white font-bold text-lg">ཀ</span>
+              <div className="w-12 h-12 flex items-center justify-center">
+                <img 
+                  src="/lovable-uploads/46a8ddb4-a6bf-4d5d-88ed-1e0973cd28b6.png" 
+                  alt="Kunphen Logo"
+                  className="w-12 h-12 object-contain"
+                />
               </div>
               <div>
                 <h3 className="text-2xl font-bold">Kunphen</h3>

@@ -33,8 +33,12 @@ const Header = () => {
       <nav className="container mx-auto px-4 py-4">
         <div className="flex justify-between items-center">
           <div className="flex items-center space-x-3">
-            <div className="w-12 h-12 bg-gradient-to-br from-golden-400 to-golden-600 rounded-full flex items-center justify-center">
-              <span className="text-white font-bold text-lg">ཀ</span>
+            <div className="w-12 h-12 flex items-center justify-center">
+              <img 
+                src="/lovable-uploads/46a8ddb4-a6bf-4d5d-88ed-1e0973cd28b6.png" 
+                alt="Kunphen Logo"
+                className="w-12 h-12 object-contain"
+              />
             </div>
             <div>
               <h1 className="text-2xl font-bold text-burgundy-900">Kunphen</h1>
