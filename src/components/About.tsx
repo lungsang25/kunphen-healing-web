@@ -21,8 +21,8 @@ const About = () => {
               Ancient Wisdom, Modern Care
             </h3>
             <p className="text-gray-700 leading-relaxed">
-              Founded in 1998, Kunphen Medical Center has been a beacon of traditional Tibetan 
-              medicine in Nepal. Our center combines centuries-old healing practices with 
+              Founded in 1973, Kunphen Medical Center has been a beacon of traditional Tibetan 
+              medicine in Nepal as its first ever Tibetan Medical System (Sowa-Rigpa). Our center combines centuries-old healing practices with 
               contemporary healthcare approaches to provide holistic treatment for our patients.
             </p>
             <p className="text-gray-700 leading-relaxed">
@@ -39,7 +39,7 @@ const About = () => {
               </div>
               <div className="text-center p-6 bg-golden-50 rounded-xl">
                 <Award className="w-12 h-12 text-golden-700 mx-auto mb-3" />
-                <h4 className="text-2xl font-bold text-burgundy-900">25+</h4>
+                <h4 className="text-2xl font-bold text-burgundy-900">50+</h4>
                 <p className="text-gray-600">Years Experience</p>
               </div>
             </div>
