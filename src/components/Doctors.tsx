@@ -1,3 +1,4 @@
+
 import { Award, BookOpen, Heart } from 'lucide-react';
 
 const Doctors = () => {
@@ -21,13 +22,31 @@ const Doctors = () => {
       description: "Dr. Nyima trained at the prestigious Men-Tsee-Khang, Tibetan Medical & Astro. Institute and has been practicing traditional Tibetan medicine for over 15+ years."
     },
     {
-      name: "Dr. Lobsang Tashi",
+      name: "Dr. Tenzin Lektsok",
       title: "Physician & Herbalist",
-      qualification: "Tibetan Medical University & Ayurvedic Studies",
+      qualification: "Central University of Tibetan Studies, Varanasi, India",
       experience: "15+ years",
-      specialization: "Digestive disorders, Respiratory conditions, Meditation therapy",
+      specialization: "Digestive disorders, Respiratory conditions, Chronic disorders",
       image: "/lovable-uploads/doctor-3.jpg",
-      description: "Dr. Tashi is an expert in herbal medicine preparation and has extensive knowledge of meditation-based healing practices."
+      description: "Dr. Tenzin is an expert in herbal medicine preparation and has extensive knowledge of meditation-based healing practices."
+    },
+    {
+      name: "Dr. Kusang Dorjee",
+      title: "Chairman",
+      qualification: "Physician & Herbalist",
+      experience: "40+ years",
+      specialization: "Digestive disorders, Respiratory conditions, Meditation therapy",
+      image: "/lovable-uploads/doctor-1.jpg",
+      description: "Dr. Kunsang is an expert in herbal medicine preparation and has extensive knowledge of meditation-based healing practices."
+    },
+    {
+      name: "Dr. Kusang Phenthok (Kun-Phen)",
+      title: "Founder",
+      qualification: "Physician & Herbalist",
+      experience: "70+ years",
+      specialization: "Digestive disorders, Chronic disorders",
+      image: "/lovable-uploads/doctor-2.jpg",
+      description: "Dr. Kunsang is an expert in herbal medicine preparation and has extensive knowledge of meditation-based healing practices."
     }
   ];
 
