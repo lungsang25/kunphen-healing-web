@@ -1,4 +1,3 @@
-
 import { Award, BookOpen, Heart } from 'lucide-react';
 
 const Doctors = () => {
@@ -13,13 +12,13 @@ const Doctors = () => {
       description: "Dr. Tashi trained at the prestigious Lhasa Tibetan Medical Institute in Tibet and has been practicing traditional Tibetan medicine for over two decades."
     },
     {
-      name: "Dr. Pema Dolma",
+      name: "Dr. Nyima Tsering",
       title: "Senior Physician",
-      qualification: "Tibetan Medical College, Lhasa & Modern Medicine Training",
-      experience: "18+ years",
-      specialization: "Women's health, Pediatrics, Herbal formulations",
+      qualification: "Men-Tsee-Khang, Tibetan Medical & Astro. Institute, India",
+      experience: "15+ years",
+      specialization: "Pulse diagnosis, Chronic conditions, Mental Health, Herbal formulations",
       image: "/lovable-uploads/doctor-2.jpg",
-      description: "Dr. Dolma combines traditional Tibetan medicine with modern medical knowledge, specializing in women's and children's health."
+      description: "Dr. Nyima trained at the prestigious Men-Tsee-Khang, Tibetan Medical & Astro. Institute and has been practicing traditional Tibetan medicine for over 15+ years."
     },
     {
       name: "Dr. Lobsang Tashi",
