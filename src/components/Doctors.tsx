@@ -1,13 +1,14 @@
+
 import { Award, BookOpen, Heart } from 'lucide-react';
 
 const Doctors = () => {
   const doctors = [
     {
       name: "Dr. Tashi Pedon",
-      title: "Chief Physician & Director",
-      qualification: "Traditional Tibetan Medicine Doctor, Lhasa Tibetan Medical Institute, Tibet",
+      title: "Senior Physician",
+      qualification: "Tibetan Medical College, Lhasa & Modern Medicine Training",
       experience: "20+ years",
-      specialization: "Pulse diagnosis, Chronic conditions, Mental health",
+      specialization: "Women's health, Pediatrics, Pulse diagnosis, Chronic conditions",
       image: "/lovable-uploads/doctor-1.jpg",
       description: "Dr. Tashi trained at the prestigious Lhasa Tibetan Medical Institute in Tibet and has been practicing traditional Tibetan medicine for over two decades."
     },
