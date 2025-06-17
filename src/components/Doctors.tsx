@@ -1,16 +1,15 @@
-
 import { Award, BookOpen, Heart } from 'lucide-react';
 
 const Doctors = () => {
   const doctors = [
     {
-      name: "Dr. Tenzin Norbu",
+      name: "Dr. Tashi Pedon",
       title: "Chief Physician & Director",
-      qualification: "Traditional Tibetan Medicine Doctor, Men-Tsee-Khang Institute",
-      experience: "25+ years",
+      qualification: "Traditional Tibetan Medicine Doctor, Lhasa Tibetan Medical Institute, Tibet",
+      experience: "20+ years",
       specialization: "Pulse diagnosis, Chronic conditions, Mental health",
       image: "/lovable-uploads/doctor-1.jpg",
-      description: "Dr. Norbu trained at the prestigious Men-Tsee-Khang Institute in Dharamshala and has been practicing traditional Tibetan medicine for over two decades."
+      description: "Dr. Tashi trained at the prestigious Lhasa Tibetan Medical Institute in Tibet and has been practicing traditional Tibetan medicine for over two decades."
     },
     {
       name: "Dr. Pema Dolma",
