@@ -1,5 +1,4 @@
 
-
 import { ArrowRight, Heart, Leaf } from 'lucide-react';
 
 const Hero = () => {
@@ -58,8 +57,8 @@ const Hero = () => {
           <div className="relative">
             <div className="relative z-10">
               <img 
-                src="/lovable-uploads/traditional-medicine.jpg" 
-                alt="Traditional Tibetan Medicine"
+                src="/lovable-uploads/520539a7-4a69-4987-a2ac-6cf6ad761847.png" 
+                alt="Kunphen Medical Centre Building"
                 className="rounded-2xl shadow-2xl w-full"
               />
             </div>
@@ -72,4 +71,3 @@ const Hero = () => {
 };
 
 export default Hero;
-
