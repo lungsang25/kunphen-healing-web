@@ -18,7 +18,7 @@ const Doctors = () => {
       qualification: "Men-Tsee-Khang, Tibetan Medical & Astro. Institute, India",
       experience: "15+ years",
       specialization: "Pulse diagnosis, Chronic conditions, Mental Health, Herbal formulations",
-      image: "/lovable-uploads/doctor-2.jpg",
+      image: "/lovable-uploads/d313e4d3-e769-49e0-a7f0-89368820653a.png",
       description: "Dr. Nyima trained at the prestigious Men-Tsee-Khang, Tibetan Medical & Astro. Institute and has been practicing traditional Tibetan medicine for over 15+ years."
     },
     {
@@ -27,7 +27,7 @@ const Doctors = () => {
       qualification: "Central University of Tibetan Studies, Varanasi, India",
       experience: "15+ years",
       specialization: "Digestive disorders, Respiratory conditions, Chronic disorders",
-      image: "/lovable-uploads/doctor-3.jpg",
+      image: "/lovable-uploads/9fee12a2-9dd1-4a53-b646-12bf8e3fdd73.png",
       description: "Dr. Tenzin is an expert in herbal medicine preparation and has extensive knowledge of meditation-based healing practices."
     },
     {
@@ -70,10 +70,18 @@ const Doctors = () => {
               className="bg-gradient-to-b from-warm-50 to-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
             >
               <div className="p-8">
-                <div className="w-32 h-32 bg-gradient-to-br from-burgundy-400 to-golden-600 rounded-full mx-auto mb-6 flex items-center justify-center">
-                  <span className="text-white text-4xl font-bold">
-                    {doctor.name.split(' ')[1].charAt(0)}
-                  </span>
+                <div className="w-32 h-32 bg-gradient-to-br from-burgundy-400 to-golden-600 rounded-full mx-auto mb-6 flex items-center justify-center overflow-hidden">
+                  {doctor.image.includes('lovable-uploads') ? (
+                    <img 
+                      src={doctor.image} 
+                      alt={doctor.name}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <span className="text-white text-4xl font-bold">
+                      {doctor.name.split(' ')[1].charAt(0)}
+                    </span>
+                  )}
                 </div>
                 
                 <div className="text-center mb-6">
