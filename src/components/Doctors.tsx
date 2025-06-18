@@ -1,4 +1,3 @@
-
 import { Award, BookOpen, Heart } from 'lucide-react';
 
 const Doctors = () => {
@@ -18,7 +17,7 @@ const Doctors = () => {
       qualification: "Men-Tsee-Khang, Tibetan Medical & Astro. Institute, India",
       experience: "15+ years",
       specialization: "Pulse diagnosis, Chronic conditions, Mental Health, Herbal formulations",
-      image: "/lovable-uploads/d313e4d3-e769-49e0-a7f0-89368820653a.png",
+      image: "/lovable-uploads/2b231717-4ac2-4214-80a1-4b329b8a1b6d.png",
       description: "Dr. Nyima trained at the prestigious Men-Tsee-Khang, Tibetan Medical & Astro. Institute and has been practicing traditional Tibetan medicine for over 15+ years."
     },
     {
@@ -27,7 +26,7 @@ const Doctors = () => {
       qualification: "Central University of Tibetan Studies, Varanasi, India",
       experience: "15+ years",
       specialization: "Digestive disorders, Respiratory conditions, Chronic disorders",
-      image: "/lovable-uploads/9fee12a2-9dd1-4a53-b646-12bf8e3fdd73.png",
+      image: "/lovable-uploads/92d8aa87-f43c-4fca-a889-72ca7c7e853d.png",
       description: "Dr. Tenzin is an expert in herbal medicine preparation and has extensive knowledge of meditation-based healing practices."
     },
     {
