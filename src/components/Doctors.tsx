@@ -1,9 +1,10 @@
+
 import { Award, BookOpen, Heart } from 'lucide-react';
 
 const Doctors = () => {
   const doctors = [
     {
-      name: "Dr. Kunsang Dorjee",
+      name: "Dr. Tashi Pedon",
       title: "Senior Physician",
       qualification: "Tibetan Medical College, Lhasa & Modern Medicine Training",
       experience: "20+ years",
@@ -21,7 +22,7 @@ const Doctors = () => {
       description: "Dr. Nyima trained at the prestigious Men-Tsee-Khang, Tibetan Medical & Astro. Institute and has been practicing traditional Tibetan medicine for over 15+ years."
     },
     {
-      name: "Dr. Tashi Pedon",
+      name: "Dr. Tenzin Lektsok",
       title: "Physician & Herbalist",
       qualification: "Central University of Tibetan Studies, Varanasi, India",
       experience: "15+ years",
