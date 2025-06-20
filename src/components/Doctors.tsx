@@ -21,7 +21,7 @@ const Doctors = () => {
       description: "Dr. Nyima trained at the prestigious Men-Tsee-Khang, Tibetan Medical & Astro. Institute and has been practicing traditional Tibetan medicine for over 15+ years."
     },
     {
-      name: "Dr. Tenzin Lektsok",
+      name: "Dr. Tashi Pedon",
       title: "Physician & Herbalist",
       qualification: "Central University of Tibetan Studies, Varanasi, India",
       experience: "15+ years",
