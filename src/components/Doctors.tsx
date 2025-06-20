@@ -1,4 +1,5 @@
 
+
 import { Award, BookOpen, Heart } from 'lucide-react';
 
 const Doctors = () => {
@@ -9,7 +10,7 @@ const Doctors = () => {
       qualification: "Tibetan Medical College, Lhasa & Modern Medicine Training",
       experience: "20+ years",
       specialization: "Women's health, Pediatrics, Pulse diagnosis, Chronic conditions",
-      image: "/lovable-uploads/2a3ccb03-c8ca-4024-8bb9-f54283323dae.png",
+      image: "/lovable-uploads/44701db8-6d61-4096-9c03-9adf933e175d.png",
       description: "Dr. Kunsang trained at the prestigious Lhasa Tibetan Medical Institute in Tibet and has been practicing traditional Tibetan medicine for over two decades."
     },
     {
@@ -27,7 +28,7 @@ const Doctors = () => {
       qualification: "Central University of Tibetan Studies, Varanasi, India",
       experience: "15+ years",
       specialization: "Digestive disorders, Respiratory conditions, Chronic disorders",
-      image: "/lovable-uploads/44701db8-6d61-4096-9c03-9adf933e175d.png",
+      image: "/lovable-uploads/2a3ccb03-c8ca-4024-8bb9-f54283323dae.png",
       description: "Dr. Tenzin is an expert in herbal medicine preparation and has extensive knowledge of meditation-based healing practices."
     },
     {
@@ -126,3 +127,4 @@ const Doctors = () => {
 };
 
 export default Doctors;
+
