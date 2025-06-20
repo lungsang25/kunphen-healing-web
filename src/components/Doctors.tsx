@@ -8,7 +8,7 @@ const Doctors = () => {
       qualification: "Tibetan Medical College, Lhasa & Modern Medicine Training",
       experience: "20+ years",
       specialization: "Women's health, Pediatrics, Pulse diagnosis, Chronic conditions",
-      image: "/lovable-uploads/doctor-1.jpg",
+      image: "/lovable-uploads/2a3ccb03-c8ca-4024-8bb9-f54283323dae.png",
       description: "Dr. Kunsang trained at the prestigious Lhasa Tibetan Medical Institute in Tibet and has been practicing traditional Tibetan medicine for over two decades."
     },
     {
@@ -17,7 +17,7 @@ const Doctors = () => {
       qualification: "Men-Tsee-Khang, Tibetan Medical & Astro. Institute, India",
       experience: "15+ years",
       specialization: "Pulse diagnosis, Chronic conditions, Mental Health, Herbal formulations",
-      image: "/lovable-uploads/2b231717-4ac2-4214-80a1-4b329b8a1b6d.png",
+      image: "/lovable-uploads/d47670dc-9152-405f-9d95-a3cfb18b57f6.png",
       description: "Dr. Nyima trained at the prestigious Men-Tsee-Khang, Tibetan Medical & Astro. Institute and has been practicing traditional Tibetan medicine for over 15+ years."
     },
     {
@@ -26,7 +26,7 @@ const Doctors = () => {
       qualification: "Central University of Tibetan Studies, Varanasi, India",
       experience: "15+ years",
       specialization: "Digestive disorders, Respiratory conditions, Chronic disorders",
-      image: "/lovable-uploads/92d8aa87-f43c-4fca-a889-72ca7c7e853d.png",
+      image: "/lovable-uploads/44701db8-6d61-4096-9c03-9adf933e175d.png",
       description: "Dr. Tenzin is an expert in herbal medicine preparation and has extensive knowledge of meditation-based healing practices."
     },
     {
@@ -35,7 +35,7 @@ const Doctors = () => {
       qualification: "Physician & Herbalist",
       experience: "40+ years",
       specialization: "Digestive disorders, Respiratory conditions, Meditation therapy",
-      image: "/lovable-uploads/doctor-1.jpg",
+      image: "/lovable-uploads/65f91f89-eaac-411e-8fb1-544ba173bc33.png",
       description: "Dr. Kunsang is an expert in herbal medicine preparation and has extensive knowledge of meditation-based healing practices."
     },
     {
@@ -44,7 +44,7 @@ const Doctors = () => {
       qualification: "Physician & Herbalist",
       experience: "70+ years",
       specialization: "Digestive disorders, Chronic disorders",
-      image: "/lovable-uploads/doctor-2.jpg",
+      image: "/lovable-uploads/6b8dc07f-2898-43df-9594-0c086fb4fd8d.png",
       description: "Dr. Kunsang is an expert in herbal medicine preparation and has extensive knowledge of meditation-based healing practices."
     }
   ];
