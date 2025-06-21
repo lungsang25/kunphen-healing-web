@@ -1,3 +1,4 @@
+
 import { Heart, Phone, Mail, MapPin } from 'lucide-react';
 
 const Footer = () => {
@@ -46,8 +47,15 @@ const Footer = () => {
               <div className="flex items-start space-x-3">
                 <MapPin className="w-5 h-5 text-golden-400 mt-1" />
                 <div className="text-burgundy-200">
-                  <p>Kunphen Marg, Chhetrapati</p>
-                  <p>Kathmandu, Nepal</p>
+                  <a 
+                    href="https://maps.app.goo.gl/mZv4F14iCj9fzgnPA"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-white transition-colors underline"
+                  >
+                    <p>Kunphen Marg, Chhetrapati</p>
+                    <p>Kathmandu, Nepal</p>
+                  </a>
                 </div>
               </div>
               <div className="flex items-center space-x-3">

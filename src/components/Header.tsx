@@ -23,7 +23,14 @@ const Header = () => {
             </div>
             <div className="flex items-center space-x-2">
               <MapPin size={14} />
-              <span>Chhetrapati, Kathmandu, Nepal</span>
+              <a 
+                href="https://maps.app.goo.gl/mZv4F14iCj9fzgnPA"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-golden-300 transition-colors underline"
+              >
+                Chhetrapati, Kathmandu, Nepal
+              </a>
             </div>
           </div>
         </div>

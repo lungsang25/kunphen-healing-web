@@ -1,4 +1,3 @@
-
 import { MapPin, Phone, Mail, Clock, MessageCircle } from 'lucide-react';
 
 const Contact = () => {
@@ -29,10 +28,15 @@ const Contact = () => {
                   </div>
                   <div>
                     <h4 className="font-semibold text-burgundy-900">Address</h4>
-                    <p className="text-gray-600">
+                    <a 
+                      href="https://maps.app.goo.gl/mZv4F14iCj9fzgnPA"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-600 hover:text-burgundy-700 transition-colors underline"
+                    >
                       Kunphen Marg, Chhetrapati<br />
                       Kathmandu, Nepal
-                    </p>
+                    </a>
                   </div>
                 </div>
 
