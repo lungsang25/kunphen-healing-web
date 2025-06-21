@@ -1,3 +1,4 @@
+
 import { MapPin, Phone, Mail, Clock, MessageCircle } from 'lucide-react';
 
 const Contact = () => {
@@ -42,8 +43,8 @@ const Contact = () => {
                   <div>
                     <h4 className="font-semibold text-burgundy-900">Phone</h4>
                     <p className="text-gray-600">
-                      +977-1-4440123<br />
-                      +977-98-12345678
+                      +977-1-5351920<br />
+                      +977-98-08614142
                     </p>
                   </div>
                 </div>
@@ -125,7 +126,7 @@ const Contact = () => {
                 <input 
                   type="tel" 
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-burgundy-500 focus:border-transparent"
-                  placeholder="+977-98-12345678"
+                  placeholder="+977-98-08614142"
                 />
               </div>
 
