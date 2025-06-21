@@ -1,9 +1,25 @@
-
-
 import { Award, BookOpen, Heart } from 'lucide-react';
 
 const Doctors = () => {
   const doctors = [
+    {
+      name: "Dr. Kusang Phenthok (Kun-Phen)",
+      title: "Founder",
+      qualification: "Physician & Herbalist",
+      experience: "70+ years",
+      specialization: "Digestive disorders, Chronic disorders",
+      image: "/lovable-uploads/6b8dc07f-2898-43df-9594-0c086fb4fd8d.png",
+      description: "Dr. Kunsang is an expert in herbal medicine preparation and has extensive knowledge of meditation-based healing practices."
+    },
+    {
+      name: "Dr. Kusang Dorjee",
+      title: "Chairman",
+      qualification: "Physician & Herbalist",
+      experience: "40+ years",
+      specialization: "Digestive disorders, Respiratory conditions, Meditation therapy",
+      image: "/lovable-uploads/65f91f89-eaac-411e-8fb1-544ba173bc33.png",
+      description: "Dr. Kunsang is an expert in herbal medicine preparation and has extensive knowledge of meditation-based healing practices."
+    },
     {
       name: "Dr. Tashi Pedon",
       title: "Senior Physician",
@@ -30,24 +46,6 @@ const Doctors = () => {
       specialization: "Digestive disorders, Respiratory conditions, Chronic disorders",
       image: "/lovable-uploads/2a3ccb03-c8ca-4024-8bb9-f54283323dae.png",
       description: "Dr. Tenzin is an expert in herbal medicine preparation and has extensive knowledge of meditation-based healing practices."
-    },
-    {
-      name: "Dr. Kusang Dorjee",
-      title: "Chairman",
-      qualification: "Physician & Herbalist",
-      experience: "40+ years",
-      specialization: "Digestive disorders, Respiratory conditions, Meditation therapy",
-      image: "/lovable-uploads/65f91f89-eaac-411e-8fb1-544ba173bc33.png",
-      description: "Dr. Kunsang is an expert in herbal medicine preparation and has extensive knowledge of meditation-based healing practices."
-    },
-    {
-      name: "Dr. Kusang Phenthok (Kun-Phen)",
-      title: "Founder",
-      qualification: "Physician & Herbalist",
-      experience: "70+ years",
-      specialization: "Digestive disorders, Chronic disorders",
-      image: "/lovable-uploads/6b8dc07f-2898-43df-9594-0c086fb4fd8d.png",
-      description: "Dr. Kunsang is an expert in herbal medicine preparation and has extensive knowledge of meditation-based healing practices."
     }
   ];
 
@@ -127,4 +125,3 @@ const Doctors = () => {
 };
 
 export default Doctors;
-
