@@ -1,4 +1,3 @@
-
 import { Heart, Phone, Mail, MapPin } from 'lucide-react';
 
 const Footer = () => {
@@ -26,7 +25,7 @@ const Footer = () => {
             </p>
             <div className="flex items-center space-x-2 text-golden-300">
               <Heart size={20} />
-              <span>Healing with compassion since 1998</span>
+              <span>Healing with compassion since 1973</span>
             </div>
           </div>
 
