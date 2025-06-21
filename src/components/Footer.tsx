@@ -1,4 +1,3 @@
-
 import { Heart, Phone, Mail, MapPin } from 'lucide-react';
 
 const Footer = () => {
@@ -64,7 +63,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="w-5 h-5 text-golden-400" />
-                <span className="text-burgundy-200">info@kunphenmedical.com</span>
+                <span className="text-burgundy-200">kunphentmc@gmail.com</span>
               </div>
             </div>
           </div>

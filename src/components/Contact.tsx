@@ -60,7 +60,7 @@ const Contact = () => {
                   <div>
                     <h4 className="font-semibold text-burgundy-900">Email</h4>
                     <p className="text-gray-600">
-                      info@kunphenmedical.com<br />
+                      kunphentmc@gmail.com<br />
                       appointments@kunphenmedical.com
                     </p>
                   </div>
