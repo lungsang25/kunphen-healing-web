@@ -1,3 +1,4 @@
+
 import { MapPin, Phone, Mail, Clock, MessageCircle } from 'lucide-react';
 
 const Contact = () => {
@@ -73,9 +74,9 @@ const Contact = () => {
                   <div>
                     <h4 className="font-semibold text-burgundy-900">Hours</h4>
                     <div className="text-gray-600">
-                      <p>Monday - Friday: 8:00 AM - 6:00 PM</p>
-                      <p>Saturday: 8:00 AM - 4:00 PM</p>
-                      <p>Sunday: 10:00 AM - 2:00 PM</p>
+                      <p>Monday - Saturday: 9:00 AM - 5:00 PM</p>
+                      <p>Sunday: Closed</p>
+                      <p>Lunch break: 12:30 PM - 2:00 PM</p>
                     </div>
                   </div>
                 </div>
