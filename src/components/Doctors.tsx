@@ -3,7 +3,7 @@ import { Award, BookOpen, Heart } from 'lucide-react';
 const Doctors = () => {
   const doctors = [
     {
-      name: "Dr. Kusang Phenthok (Kun-Phen)",
+      name: "Late Dr. Kunsang Phenthok (Kun-Phen)",
       title: "Founder",
       qualification: "Physician & Herbalist",
       experience: "70+ years",
