@@ -59,6 +59,7 @@ const Header = () => {
             <a href="#about" className="text-gray-700 hover:text-burgundy-700 transition-colors">About</a>
             <a href="#services" className="text-gray-700 hover:text-burgundy-700 transition-colors">Services</a>
             <a href="#doctors" className="text-gray-700 hover:text-burgundy-700 transition-colors">Doctors</a>
+            <a href="#media" className="text-gray-700 hover:text-burgundy-700 transition-colors">Media and News</a>
             <a href="#contact" className="text-gray-700 hover:text-burgundy-700 transition-colors">Contact</a>
             <button className="bg-burgundy-700 text-white px-6 py-2 rounded-full hover:bg-burgundy-800 transition-colors">
               Book Appointment
@@ -82,6 +83,7 @@ const Header = () => {
               <a href="#about" className="text-gray-700 hover:text-burgundy-700 transition-colors">About</a>
               <a href="#services" className="text-gray-700 hover:text-burgundy-700 transition-colors">Services</a>
               <a href="#doctors" className="text-gray-700 hover:text-burgundy-700 transition-colors">Doctors</a>
+              <a href="#media" className="text-gray-700 hover:text-burgundy-700 transition-colors">Media and News</a>
               <a href="#contact" className="text-gray-700 hover:text-burgundy-700 transition-colors">Contact</a>
               <button className="bg-burgundy-700 text-white px-6 py-2 rounded-full hover:bg-burgundy-800 transition-colors w-fit">
                 Book Appointment
