@@ -8,7 +8,7 @@ const Hero = () => {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-8">
             <div className="space-y-4">
-              <h1 className="text-5xl lg:text-6xl font-bold text-burgundy-900 leading-tight">
+              <h1 className="text-5xl lg:text-6xl font-bold text-burgundy-900 leading-tight animate-fade-in">
                 Traditional
                 <span className="text-golden-600"> Tibetan Medicine: </span>
                 Sowa Rigpa System
