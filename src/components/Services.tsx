@@ -1,4 +1,3 @@
-
 import { Leaf, Heart, Brain, Users, Stethoscope, Sun } from 'lucide-react';
 
 const Services = () => {
@@ -85,11 +84,8 @@ const Services = () => {
         <div className="mt-16 bg-gradient-to-r from-burgundy-700 to-burgundy-900 rounded-2xl p-8 text-center text-white">
           <h3 className="text-3xl font-bold mb-4">Ready to Begin Your Healing Journey?</h3>
           <p className="text-xl mb-8 opacity-90">
-            Schedule a consultation with our experienced Tibetan medicine practitioners.
+            Contact us to learn more about our traditional Tibetan medicine treatments.
           </p>
-          <button className="bg-white text-burgundy-700 px-8 py-4 rounded-full font-semibold hover:bg-golden-50 transition-colors">
-            Book Your Appointment Today
-          </button>
         </div>
       </div>
     </section>

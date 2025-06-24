@@ -111,10 +111,6 @@ const Doctors = () => {
                     </p>
                   </div>
                 </div>
-
-                <button className="w-full mt-6 bg-burgundy-700 text-white py-3 rounded-full hover:bg-burgundy-800 transition-colors">
-                  Book Consultation
-                </button>
               </div>
             </div>
           ))}

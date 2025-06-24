@@ -1,4 +1,3 @@
-
 import { ArrowRight, Heart, Leaf } from 'lucide-react';
 
 const Hero = () => {
@@ -20,10 +19,6 @@ const Hero = () => {
             </div>
 
             <div className="flex flex-wrap gap-4">
-              <button className="bg-burgundy-700 text-white px-8 py-4 rounded-full hover:bg-burgundy-800 transition-all transform hover:scale-105 flex items-center space-x-2">
-                <span>Book Consultation</span>
-                <ArrowRight size={18} />
-              </button>
               <button className="border-2 border-burgundy-700 text-burgundy-700 px-8 py-4 rounded-full hover:bg-burgundy-700 hover:text-white transition-all">
                 Learn More
               </button>
