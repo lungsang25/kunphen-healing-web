@@ -110,7 +110,7 @@ const Header = () => {
               to="/media-news" 
               className={`transition-colors ${location.pathname.startsWith('/media-news') ? 'text-burgundy-700 font-medium' : 'text-gray-700 hover:text-burgundy-700'}`}
             >
-              Media and News
+              Article
             </Link>
             <button 
               onClick={() => scrollToSection('contact')} 
@@ -162,7 +162,7 @@ const Header = () => {
                 onClick={() => setIsMenuOpen(false)}
                 className="text-left text-gray-700 hover:text-burgundy-700 transition-colors"
               >
-                Media and News
+                Article
               </Link>
               <button 
                 onClick={() => scrollToSection('contact')} 
