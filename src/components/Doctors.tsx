@@ -23,11 +23,11 @@ const Doctors = () => {
     {
       name: "Dr. Tashi Pedon",
       title: "Senior Physician",
-      qualification: "Tibetan Medical College, Lhasa & Modern Medicine Training",
+      qualification: "Tibetan Medical College, Lhasa",
       experience: "20+ years",
       specialization: "Women's health, Pediatrics, Pulse diagnosis, Chronic conditions",
       image: "/lovable-uploads/44701db8-6d61-4096-9c03-9adf933e175d.png",
-      description: "Dr. Kunsang trained at the prestigious Lhasa Tibetan Medical Institute in Tibet and has been practicing traditional Tibetan medicine for over two decades."
+      description: "Dr. Tashi trained at the prestigious Lhasa Tibetan Medical Institute from renowned physicians like Truru Tsenam Rinpoche and Gen Gonju Wangdu. And has been practicing traditional Tibetan Medicine for over two decades."
     },
     {
       name: "Dr. Nyima Tsering",
