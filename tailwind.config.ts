@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -175,6 +174,18 @@ export default {
 				'.animation-delay-800': {
 					'animation-delay': '800ms',
 				},
+				'.line-clamp-2': {
+					'overflow': 'hidden',
+					'display': '-webkit-box',
+					'-webkit-box-orient': 'vertical',
+					'-webkit-line-clamp': '2',
+				},
+				'.line-clamp-3': {
+					'overflow': 'hidden',
+					'display': '-webkit-box',
+					'-webkit-box-orient': 'vertical',
+					'-webkit-line-clamp': '3',
+				}
 			}
 			addUtilities(newUtilities)
 		}
