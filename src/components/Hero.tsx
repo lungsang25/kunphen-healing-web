@@ -1,3 +1,4 @@
+
 import { ArrowRight, Heart, Leaf } from 'lucide-react';
 
 const Hero = () => {
@@ -7,10 +8,10 @@ const Hero = () => {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-8">
             <div className="space-y-4">
-              <h1 className="text-5xl lg:text-6xl font-bold text-burgundy-900 leading-tight animate-fade-in">
-                Traditional
-                <span className="text-golden-600"> Tibetan Medicine: </span>
-                Sowa Rigpa System
+              <h1 className="text-5xl lg:text-6xl font-bold text-burgundy-900 leading-tight">
+                <span className="inline-block animate-fade-in">Traditional</span>
+                <span className="text-golden-600 inline-block animate-fade-in animation-delay-200"> Tibetan Medicine: </span>
+                <span className="inline-block animate-fade-in animation-delay-400">Sowa Rigpa System</span>
               </h1>
               <p className="text-xl text-gray-700 leading-relaxed">
                 Experience authentic Tibetan medicine at Kunphen Medical Center. 
