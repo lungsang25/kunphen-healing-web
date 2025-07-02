@@ -52,7 +52,7 @@ const Article = () => {
       <div className="bg-white border-b">
         <div className="container mx-auto px-4 py-4">
           <Link 
-            to="/media-news" 
+            to="/articles" 
             className="inline-flex items-center gap-2 text-burgundy-700 hover:text-burgundy-900 transition-colors"
           >
             <ArrowLeft size={20} />
@@ -134,7 +134,7 @@ const Article = () => {
             <div className="grid md:grid-cols-3 gap-6">
               {recentArticles.filter(a => a.id !== article.id).slice(0, 3).map((relatedArticle) => (
                 <article key={relatedArticle.id} className="group">
-                  <Link to={`/media-news/${relatedArticle.slug}`}>
+                  <Link to={`/articles/${relatedArticle.slug}`}>
                     <div className="aspect-video bg-gray-200 rounded-lg overflow-hidden mb-4">
                       <img
                         src={relatedArticle.featuredImage}

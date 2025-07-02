@@ -107,8 +107,8 @@ const Header = () => {
               Doctors
             </button>
             <Link 
-              to="/media-news" 
-              className={`transition-colors ${location.pathname.startsWith('/media-news') ? 'text-burgundy-700 font-medium' : 'text-gray-700 hover:text-burgundy-700'}`}
+              to="/articles" 
+              className={`transition-colors ${location.pathname.startsWith('/articles') ? 'text-burgundy-700 font-medium' : 'text-gray-700 hover:text-burgundy-700'}`}
             >
               Articles
             </Link>
@@ -158,7 +158,7 @@ const Header = () => {
                 Doctors
               </button>
               <Link 
-                to="/media-news" 
+                to="/articles"
                 onClick={() => setIsMenuOpen(false)}
                 className="text-left text-gray-700 hover:text-burgundy-700 transition-colors"
               >

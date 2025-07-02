@@ -96,7 +96,7 @@ const MediaNews = () => {
                   className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow animate-fade-in"
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
-                  <Link to={`/media-news/${article.slug}`}>
+                  <Link to={`/articles/${article.slug}`}>
                     <div className="aspect-video bg-gray-200 overflow-hidden">
                       <img
                         src={article.featuredImage}
@@ -117,7 +117,7 @@ const MediaNews = () => {
                       </span>
                     </div>
                     
-                    <Link to={`/media-news/${article.slug}`}>
+                    <Link to={`/articles/${article.slug}`}>
                       <h2 className="text-xl font-semibold text-burgundy-900 mb-3 hover:text-burgundy-700 transition-colors line-clamp-2">
                         {article.title}
                       </h2>
@@ -143,7 +143,7 @@ const MediaNews = () => {
                       </div>
                       
                       <Link 
-                        to={`/media-news/${article.slug}`}
+                        to={`/articles/${article.slug}`}
                         className="text-burgundy-700 hover:text-burgundy-900 font-medium text-sm transition-colors"
                       >
                         Read More →

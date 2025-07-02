@@ -19,8 +19,8 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/media-news" element={<MediaNews />} />
-          <Route path="/media-news/:slug" element={<Article />} />
+          <Route path="/articles" element={<MediaNews />} />
+          <Route path="/articles/:slug" element={<Article />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
