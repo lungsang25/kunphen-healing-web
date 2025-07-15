@@ -27,7 +27,7 @@ const Doctors = () => {
       experience: "20+ years",
       specialization: "Women's health, Pediatrics, Pulse diagnosis, Chronic conditions",
       image: "/lovable-uploads/44701db8-6d61-4096-9c03-9adf933e175d.png",
-      description: "Dr. Tashi trained at the prestigious Lhasa Tibetan Medical Institute from renowned physicians like Truru Tsenam Rinpoche and Gen Gonju Wangdu. And has been practicing traditional Tibetan Medicine for over two decades."
+      description: "Dr. Tashi is a highly respected practitioner of Traditional Tibetan Medicine (Sowa Rigpa), with over two decades of clinical experience. She received her formal training at the prestigious Lhasa Tibetan Medical Institute, studying under renowned masters such as Truru Tsenam Rinpoche and Gen Gonju Wangdu, and later had the good fortune of further refining her clinical skills under esteemed physicians including Dr. Kunsang. Dr. Tashi is widely known among her patients for her compassionate, attentive, and deeply caring approach to healing. She possesses extensive knowledge in the treatment of chronic non-communicable diseases, particularly rheumatoid arthritis (RA factor), internal disorders, and psychological conditions—areas in which she has gained notable clinical success. With her strong grounding in classical Sowa Rigpa diagnostics and therapies, combined with a sincere dedication to patient well-being, Dr. Tashi continues to make a profound impact in the field of Tibetan medicine."
     },
     {
       name: "Dr. Nyima Tsering",
