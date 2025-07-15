@@ -45,7 +45,7 @@ const Doctors = () => {
       experience: "15+ years",
       specialization: "Digestive disorders, Respiratory conditions, Chronic disorders",
       image: "/lovable-uploads/2a3ccb03-c8ca-4024-8bb9-f54283323dae.png",
-      description: "Dr. Tenzin is an expert in herbal medicine preparation and has extensive knowledge of meditation-based healing practices."
+      description: "Dr. Tenzin is an experienced specialist in internal chronic diseases, with particular expertise in managing complex conditions such as rheumatoid arthritis (RA factor) and psychological disorders. With a long-standing clinical background, Dr. Tenzin is known for providing effective, compassionate care for patients facing persistent and challenging health issues."
     }
   ];
 
