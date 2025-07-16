@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import { Upload, Save, Eye, ArrowLeft, AlertCircle, CheckCircle } from 'lucide-react';
+import { Upload, Save, Eye, ArrowLeft, AlertCircle, CheckCircle, Trash2 } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -54,6 +54,8 @@ const PostArticles = () => {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [autoSaveStatus, setAutoSaveStatus] = useState<'saved' | 'saving' | 'error' | null>(null);
+  const [articles, setArticles] = useState<any[]>([]);
+  const [isLoadingArticles, setIsLoadingArticles] = useState(true);
 
   const { register, handleSubmit, formState: { errors }, setValue, watch, reset } = useForm<ArticleFormData>({
     defaultValues: {
@@ -110,6 +112,33 @@ const PostArticles = () => {
       }
     }
   }, [setValue]);
+
+  // Fetch articles
+  useEffect(() => {
+    fetchArticles();
+  }, []);
+
+  const fetchArticles = async () => {
+    try {
+      setIsLoadingArticles(true);
+      const { data, error } = await supabase
+        .from('articles')
+        .select('id, title, author, created_at, is_published')
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+      setArticles(data || []);
+    } catch (error) {
+      console.error('Error fetching articles:', error);
+      toast({
+        title: "Failed to load articles",
+        description: "Please refresh the page",
+        variant: "destructive"
+      });
+    } finally {
+      setIsLoadingArticles(false);
+    }
+  };
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -216,6 +245,9 @@ const PostArticles = () => {
         description: data.isPublished ? "Your article is now published" : "Your article is saved as draft"
       });
 
+      // Refresh articles list
+      fetchArticles();
+      
       navigate('/articles');
     } catch (error) {
       console.error('Error submitting article:', error);
@@ -226,6 +258,32 @@ const PostArticles = () => {
       });
     } finally {
       setIsSubmitting(false);
+    }
+  };
+
+  const deleteArticle = async (articleId: string) => {
+    try {
+      const { error } = await supabase
+        .from('articles')
+        .delete()
+        .eq('id', articleId);
+
+      if (error) throw error;
+
+      toast({
+        title: "Article deleted successfully",
+        description: "The article has been removed"
+      });
+
+      // Refresh articles list
+      fetchArticles();
+    } catch (error) {
+      console.error('Error deleting article:', error);
+      toast({
+        title: "Failed to delete article",
+        description: "Please try again",
+        variant: "destructive"
+      });
     }
   };
 
@@ -498,6 +556,54 @@ const PostArticles = () => {
               >
                 Cancel
               </Button>
+            </div>
+
+            {/* Articles List */}
+            <div className="bg-white p-4 rounded-lg shadow-sm border">
+              <h3 className="font-semibold text-burgundy-900 mb-4">Created Articles</h3>
+              
+              {isLoadingArticles ? (
+                <div className="flex items-center justify-center py-8">
+                  <div className="w-6 h-6 border-2 border-burgundy-700 border-t-transparent rounded-full animate-spin"></div>
+                </div>
+              ) : articles.length === 0 ? (
+                <p className="text-gray-500 text-sm text-center py-8">No articles created yet</p>
+              ) : (
+                <div className="space-y-3 max-h-96 overflow-y-auto">
+                  {articles.map((article) => (
+                    <div key={article.id} className="flex items-start justify-between p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
+                      <div className="flex-1 min-w-0">
+                        <h4 className="font-medium text-sm text-burgundy-900 truncate">
+                          {article.title}
+                        </h4>
+                        <p className="text-xs text-gray-500 mt-1">
+                          By {article.author}
+                        </p>
+                        <div className="flex items-center gap-2 mt-1">
+                          <span className={`text-xs px-2 py-1 rounded-full ${
+                            article.is_published 
+                              ? 'bg-green-100 text-green-700' 
+                              : 'bg-yellow-100 text-yellow-700'
+                          }`}>
+                            {article.is_published ? 'Published' : 'Draft'}
+                          </span>
+                          <span className="text-xs text-gray-400">
+                            {new Date(article.created_at).toLocaleDateString()}
+                          </span>
+                        </div>
+                      </div>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => deleteArticle(article.id)}
+                        className="text-red-500 hover:text-red-700 hover:bg-red-50 ml-2"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </Button>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </form>
