@@ -1,23 +1,62 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Calendar, Search, Tag } from 'lucide-react';
-import { articles, Article } from '../data/articles';
+import { supabase } from '@/integrations/supabase/client';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
+interface Article {
+  id: string;
+  title: string;
+  slug: string;
+  content: string;
+  description: string;
+  image_url: string;
+  created_at: string;
+  author: string;
+  tags: string[];
+  read_time: number;
+  is_published: boolean;
+}
+
 const MediaNews = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [selectedTag, setSelectedTag] = useState('All');
+  const [articles, setArticles] = useState<Article[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const categories = ['All', ...new Set(articles.map(article => article.category))];
+  // Get unique tags from articles
+  const allTags = ['All', ...new Set(articles.flatMap(article => article.tags))];
 
   const filteredArticles = articles.filter(article => {
     const matchesSearch = article.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         article.excerpt.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = selectedCategory === 'All' || article.category === selectedCategory;
-    return matchesSearch && matchesCategory;
-  }).sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+                         article.description.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesTag = selectedTag === 'All' || article.tags.includes(selectedTag);
+    return matchesSearch && matchesTag;
+  }).sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+
+  // Fetch articles from Supabase
+  useEffect(() => {
+    const fetchArticles = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('articles')
+          .select('*')
+          .eq('is_published', true)
+          .order('created_at', { ascending: false });
+
+        if (error) throw error;
+        setArticles(data || []);
+      } catch (error) {
+        console.error('Error fetching articles:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchArticles();
+  }, []);
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -27,6 +66,19 @@ const MediaNews = () => {
       day: 'numeric' 
     });
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-warm-50">
+        <Header />
+        <div className="container mx-auto px-4 py-16 text-center">
+          <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-burgundy-700"></div>
+          <p className="mt-4 text-gray-600">Loading articles...</p>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-warm-50">
@@ -60,19 +112,19 @@ const MediaNews = () => {
               />
             </div>
 
-            {/* Category Filter */}
+            {/* Tag Filter */}
             <div className="flex gap-2 flex-wrap">
-              {categories.map((category) => (
+              {allTags.map((tag) => (
                 <button
-                  key={category}
-                  onClick={() => setSelectedCategory(category)}
+                  key={tag}
+                  onClick={() => setSelectedTag(tag)}
                   className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                    selectedCategory === category
+                    selectedTag === tag
                       ? 'bg-burgundy-700 text-white'
                       : 'bg-gray-100 text-gray-700 hover:bg-burgundy-100'
                   }`}
                 >
-                  {category}
+                  {tag}
                 </button>
               ))}
             </div>
@@ -98,11 +150,17 @@ const MediaNews = () => {
                 >
                   <Link to={`/articles/${article.slug}`}>
                     <div className="aspect-video bg-gray-200 overflow-hidden">
-                      <img
-                        src={article.featuredImage}
-                        alt={article.title}
-                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                      />
+                      {article.image_url ? (
+                        <img
+                          src={article.image_url}
+                          alt={article.title}
+                          className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-gradient-to-br from-burgundy-100 to-burgundy-200 flex items-center justify-center">
+                          <span className="text-burgundy-500 text-sm">No Image</span>
+                        </div>
+                      )}
                     </div>
                   </Link>
                   
@@ -110,10 +168,10 @@ const MediaNews = () => {
                     <div className="flex items-center gap-4 text-sm text-gray-500 mb-3">
                       <div className="flex items-center gap-1">
                         <Calendar size={16} />
-                        <span>{formatDate(article.createdAt)}</span>
+                        <span>{formatDate(article.created_at)}</span>
                       </div>
-                      <span className="bg-burgundy-100 text-burgundy-700 px-2 py-1 rounded-full text-xs">
-                        {article.category}
+                      <span className="text-xs text-gray-500">
+                        {article.read_time} min read
                       </span>
                     </div>
                     
@@ -124,7 +182,7 @@ const MediaNews = () => {
                     </Link>
                     
                     <p className="text-gray-600 mb-4 line-clamp-3">
-                      {article.excerpt}
+                      {article.description}
                     </p>
                     
                     <div className="flex items-center justify-between">
