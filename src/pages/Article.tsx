@@ -1,14 +1,84 @@
 
 import { useParams, Link, Navigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import { Calendar, User, ArrowLeft, Tag } from 'lucide-react';
-import { getArticleBySlug, getRecentArticles } from '../data/articles';
+import { supabase } from '@/integrations/supabase/client';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
+interface Article {
+  id: string;
+  title: string;
+  slug: string;
+  content: string;
+  description: string;
+  image_url: string;
+  created_at: string;
+  author: string;
+  tags: string[];
+  read_time: number;
+  is_published: boolean;
+}
+
 const Article = () => {
   const { slug } = useParams<{ slug: string }>();
-  const article = slug ? getArticleBySlug(slug) : null;
-  const recentArticles = getRecentArticles(3);
+  const [article, setArticle] = useState<Article | null>(null);
+  const [recentArticles, setRecentArticles] = useState<Article[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchArticle = async () => {
+      if (!slug) return;
+      
+      try {
+        const { data, error } = await supabase
+          .from('articles')
+          .select('*')
+          .eq('slug', slug)
+          .eq('is_published', true)
+          .single();
+
+        if (error) throw error;
+        setArticle(data);
+      } catch (error) {
+        console.error('Error fetching article:', error);
+      }
+    };
+
+    const fetchRecentArticles = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('articles')
+          .select('*')
+          .eq('is_published', true)
+          .order('created_at', { ascending: false })
+          .limit(4);
+
+        if (error) throw error;
+        setRecentArticles(data || []);
+      } catch (error) {
+        console.error('Error fetching recent articles:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchArticle();
+    fetchRecentArticles();
+  }, [slug]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-warm-50">
+        <Header />
+        <div className="container mx-auto px-4 py-16 text-center">
+          <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-burgundy-700"></div>
+          <p className="mt-4 text-gray-600">Loading article...</p>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
 
   if (!article) {
     return <Navigate to="/404" replace />;
@@ -23,26 +93,6 @@ const Article = () => {
     });
   };
 
-  const renderContent = (content: string) => {
-    // Simple markdown-like rendering for headings and paragraphs
-    return content.split('\n').map((line, index) => {
-      if (line.startsWith('# ')) {
-        return <h1 key={index} className="text-3xl font-bold text-burgundy-900 mb-6 mt-8">{line.slice(2)}</h1>;
-      } else if (line.startsWith('## ')) {
-        return <h2 key={index} className="text-2xl font-semibold text-burgundy-800 mb-4 mt-6">{line.slice(3)}</h2>;
-      } else if (line.startsWith('### ')) {
-        return <h3 key={index} className="text-xl font-semibold text-burgundy-700 mb-3 mt-4">{line.slice(4)}</h3>;
-      } else if (line.startsWith('**') && line.endsWith('**')) {
-        return <p key={index} className="font-semibold text-gray-800 mb-2">{line.slice(2, -2)}</p>;
-      } else if (line.startsWith('- ')) {
-        return <li key={index} className="text-gray-700 mb-1 ml-4">{line.slice(2)}</li>;
-      } else if (line.trim() === '') {
-        return <div key={index} className="mb-2"></div>;
-      } else {
-        return <p key={index} className="text-gray-700 mb-4 leading-relaxed">{line}</p>;
-      }
-    });
-  };
 
   return (
     <div className="min-h-screen bg-warm-50">
@@ -69,14 +119,14 @@ const Article = () => {
             <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600 mb-6">
               <div className="flex items-center gap-1">
                 <Calendar size={16} />
-                <span>{formatDate(article.createdAt)}</span>
+                <span>{formatDate(article.created_at)}</span>
               </div>
               <div className="flex items-center gap-1">
                 <User size={16} />
                 <span>{article.author}</span>
               </div>
               <span className="bg-burgundy-100 text-burgundy-700 px-3 py-1 rounded-full">
-                {article.category}
+                {article.read_time} min read
               </span>
             </div>
 
@@ -86,13 +136,15 @@ const Article = () => {
             </h1>
 
             {/* Featured Image */}
-            <div className="aspect-video bg-gray-200 rounded-lg overflow-hidden mb-8 animate-fade-in animation-delay-200">
-              <img
-                src={article.featuredImage}
-                alt={article.title}
-                className="w-full h-full object-cover"
-              />
-            </div>
+            {article.image_url && (
+              <div className="aspect-video bg-gray-200 rounded-lg overflow-hidden mb-8 animate-fade-in animation-delay-200">
+                <img
+                  src={article.image_url}
+                  alt={article.title}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            )}
           </div>
         </div>
       </section>
@@ -103,7 +155,7 @@ const Article = () => {
           <div className="max-w-4xl mx-auto">
             <div className="bg-white rounded-lg shadow-sm p-8 mb-8">
               <div className="prose prose-lg max-w-none">
-                {renderContent(article.content)}
+                <div dangerouslySetInnerHTML={{ __html: article.content }} />
               </div>
 
               {/* Tags */}
@@ -136,17 +188,23 @@ const Article = () => {
                 <article key={relatedArticle.id} className="group">
                   <Link to={`/articles/${relatedArticle.slug}`}>
                     <div className="aspect-video bg-gray-200 rounded-lg overflow-hidden mb-4">
-                      <img
-                        src={relatedArticle.featuredImage}
-                        alt={relatedArticle.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
+                      {relatedArticle.image_url ? (
+                        <img
+                          src={relatedArticle.image_url}
+                          alt={relatedArticle.title}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-gradient-to-br from-burgundy-100 to-burgundy-200 flex items-center justify-center">
+                          <span className="text-burgundy-500 text-sm">No Image</span>
+                        </div>
+                      )}
                     </div>
                     <h4 className="text-lg font-semibold text-burgundy-900 mb-2 group-hover:text-burgundy-700 transition-colors line-clamp-2">
                       {relatedArticle.title}
                     </h4>
                     <p className="text-gray-600 text-sm line-clamp-2">
-                      {relatedArticle.excerpt}
+                      {relatedArticle.description}
                     </p>
                   </Link>
                 </article>
