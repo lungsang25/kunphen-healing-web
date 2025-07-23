@@ -22,7 +22,7 @@ const Doctors = () => {
     },
     {
       name: "Dr. Tashi Pedon",
-      title: "Senior Physician",
+      title: "President/Senior Physician",
       qualification: "Tibetan Medical College, Lhasa",
       experience: "20+ years",
       specialization: "Women's health, Pediatrics, Pulse diagnosis, Chronic conditions",
