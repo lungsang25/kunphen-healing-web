@@ -31,7 +31,7 @@ const Doctors = () => {
     },
     {
       name: "Dr. Nyima Tsering",
-      title: "Senior Physician",
+      title: "Managing Director/Senior Physician/Herbalist",
       qualification: "Men-Tsee-Khang, Tibetan Medical & Astro. Institute, India",
       experience: "15+ years",
       specialization: "Pulse diagnosis, Chronic conditions, Mental Health, Herbal formulations",
