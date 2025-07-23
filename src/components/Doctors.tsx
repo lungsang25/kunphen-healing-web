@@ -40,7 +40,7 @@ const Doctors = () => {
     },
     {
       name: "Dr. Tenzin Lektsok",
-      title: "Physician & Herbalist",
+      title: "Senior physician",
       qualification: "Central University of Tibetan Studies, Varanasi, India",
       experience: "15+ years",
       specialization: "Digestive disorders, Respiratory conditions, Chronic disorders",
