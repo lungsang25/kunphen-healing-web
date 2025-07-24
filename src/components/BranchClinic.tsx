@@ -11,7 +11,7 @@ const BranchClinic = () => {
         <div className="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
           <div className="lg:order-last">
             <img 
-              src="/lovable-uploads/166bf338-496b-42bc-af2f-9b50dbfd9517.png" 
+              src="/lovable-uploads/6ea67a64-d8f4-4797-b9bb-4d9511c57532.png" 
               alt="Boudhanath Stupa - UNESCO World Heritage Site" 
               className="w-full h-auto rounded-lg shadow-lg"
             />
