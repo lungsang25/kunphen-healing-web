@@ -1,4 +1,4 @@
-import { Award, BookOpen, Heart } from 'lucide-react';
+import { Award, BookOpen, Heart, GraduationCap, Stethoscope } from 'lucide-react';
 
 const Doctors = () => {
   const doctors = [
@@ -50,66 +50,79 @@ const Doctors = () => {
   ];
 
   return (
-    <section id="doctors" className="py-20 bg-white">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-burgundy-900 mb-4">
+    <section id="doctors" className="py-16 md:py-24 bg-background">
+      <div className="container mx-auto px-4 md:px-6">
+        {/* Section header */}
+        <div className="text-center mb-12 md:mb-16 max-w-3xl mx-auto">
+          <span className="text-label uppercase text-burgundy-600 block mb-3">Meet Our Team</span>
+          <h2 className="font-heading text-h2 text-burgundy-900 mb-4">
             Our Expert Physicians
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-lg text-muted-foreground leading-relaxed">
             Meet our team of qualified Tibetan medicine practitioners, each bringing 
             years of experience and deep knowledge of traditional healing arts.
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-8">
+        {/* Doctors grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {doctors.map((doctor, index) => (
             <div 
               key={index}
-              className="bg-gradient-to-b from-warm-50 to-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
+              className="group card-elevated p-6 md:p-8 hover-lift bg-gradient-to-b from-cream-50 to-background border-sage-200/50"
             >
-              <div className="p-8">
-                <div className="w-32 h-32 bg-gradient-to-br from-burgundy-400 to-golden-600 rounded-full mx-auto mb-6 flex items-center justify-center overflow-hidden">
-                  {doctor.image.includes('lovable-uploads') ? (
-                    <img 
-                      src={doctor.image} 
-                      alt={doctor.name}
-                      className="w-full h-full object-cover"
-                    />
-                  ) : (
-                    <span className="text-white text-4xl font-bold">
-                      {doctor.name.split(' ')[1].charAt(0)}
+              {/* Profile image */}
+              <div className="doctor-image-container mb-6">
+                {doctor.image.includes('lovable-uploads') ? (
+                  <img 
+                    src={doctor.image} 
+                    alt={doctor.name}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <div className="w-full h-full bg-gradient-to-br from-burgundy-400 to-golden-500 flex items-center justify-center">
+                    <span className="text-white text-3xl font-bold">
+                      {doctor.name.split(' ')[1]?.charAt(0) || doctor.name.charAt(0)}
                     </span>
-                  )}
+                  </div>
+                )}
+              </div>
+              
+              {/* Doctor info */}
+              <div className="text-center mb-6">
+                <h3 className="font-heading text-lg md:text-xl font-bold text-burgundy-900 mb-1 leading-tight">
+                  {doctor.name}
+                </h3>
+                <p className="text-accent font-semibold text-body-sm mb-2">
+                  {doctor.title}
+                </p>
+                <div className="flex items-center justify-center gap-2 text-body-sm text-muted-foreground">
+                  <GraduationCap size={14} />
+                  <span className="line-clamp-1">{doctor.qualification}</span>
                 </div>
-                
-                <div className="text-center mb-6">
-                  <h3 className="text-xl font-bold text-burgundy-900 mb-1">
-                    {doctor.name}
-                  </h3>
-                  <p className="text-golden-700 font-semibold mb-2">
-                    {doctor.title}
-                  </p>
-                  <p className="text-sm text-gray-600 mb-4">
-                    {doctor.qualification}
-                  </p>
-                </div>
+              </div>
 
-                <div className="space-y-4">
-                  <div className="flex items-center space-x-3">
-                    <Award className="w-5 h-5 text-burgundy-600" />
-                    <span className="text-sm text-gray-700">{doctor.experience}</span>
+              {/* Details */}
+              <div className="space-y-3 pt-4 border-t border-sage-100">
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-full bg-burgundy-100 flex items-center justify-center flex-shrink-0">
+                    <Award className="w-4 h-4 text-burgundy-600" />
                   </div>
-                  <div className="flex items-start space-x-3">
-                    <Heart className="w-5 h-5 text-golden-600 mt-0.5" />
-                    <span className="text-sm text-gray-700">{doctor.specialization}</span>
+                  <span className="text-body-sm text-foreground/75">{doctor.experience}</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-full bg-golden-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <Stethoscope className="w-4 h-4 text-golden-600" />
                   </div>
-                  <div className="flex items-start space-x-3">
-                    <BookOpen className="w-5 h-5 text-earth-600 mt-0.5" />
-                    <p className="text-sm text-gray-600 leading-relaxed">
-                      {doctor.description}
-                    </p>
+                  <span className="text-body-sm text-foreground/75 line-clamp-2">{doctor.specialization}</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-full bg-sage-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <BookOpen className="w-4 h-4 text-sage-600" />
                   </div>
+                  <p className="text-body-sm text-foreground/65 line-clamp-3">
+                    {doctor.description}
+                  </p>
                 </div>
               </div>
             </div>
