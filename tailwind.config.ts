@@ -19,8 +19,8 @@ export default {
 		},
 		extend: {
 			fontFamily: {
-				'heading': ['Crimson Pro', 'Georgia', 'serif'],
-				'body': ['Inter', 'system-ui', 'sans-serif'],
+				'heading': ['Cormorant Garamond', 'Georgia', 'serif'],
+				'body': ['Lora', 'Georgia', 'serif'],
 			},
 			fontSize: {
 				// Typography scale based on specifications
