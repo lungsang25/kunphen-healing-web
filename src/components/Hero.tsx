@@ -64,9 +64,9 @@ const Hero = () => {
       <div className="absolute bottom-20 left-10 w-48 h-48 bg-burgundy-100/30 rounded-full blur-2xl" />
       
       <div className="container mx-auto px-4 md:px-6 pt-5 md:pt-10 pb-16 md:pb-24 relative">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div className="grid md:grid-cols-12 gap-4 md:gap-6 items-center">
           {/* Content */}
-          <div className="space-y-8">
+          <div className="md:col-span-5 space-y-8">
             {/* Label - Tibetan Herbal Medicine Touch */}
             <div className="inline-flex items-center gap-3 px-5 py-2.5 bg-gradient-to-r from-sage-100 via-golden-50 to-sage-100 rounded-full opacity-0 animate-fade-in border border-sage-200/50 shadow-sm hover:shadow-md transition-all duration-500 group cursor-default">
               {/* Animated Tibetan-inspired icon */}
@@ -181,10 +181,10 @@ const Hero = () => {
           </div>
 
           {/* Image Slider */}
-          <div className="relative opacity-0 animate-fade-in-scale animation-delay-200">
+          <div className="md:col-span-7 relative opacity-0 animate-fade-in-scale animation-delay-200 mt-8 md:mt-12">
             <div className="relative z-10">
               {/* Slider Container */}
-              <div className="relative overflow-hidden rounded-2xl shadow-elevated h-[350px] md:h-[450px] lg:h-[450px]">
+              <div className="relative overflow-hidden rounded-2xl shadow-elevated h-[350px] md:h-[450px] lg:h-[420px] w-full">
                 {heroImages.map((image, index) => (
                   <img
                     key={index}
