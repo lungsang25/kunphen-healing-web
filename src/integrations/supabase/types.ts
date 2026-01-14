@@ -14,6 +14,42 @@ export type Database = {
   }
   public: {
     Tables: {
+      gallery_images: {
+        Row: {
+          id: string
+          title: string
+          description: string | null
+          image_url: string
+          category: string | null
+          display_order: number | null
+          is_visible: boolean | null
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          title: string
+          description?: string | null
+          image_url: string
+          category?: string | null
+          display_order?: number | null
+          is_visible?: boolean | null
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          title?: string
+          description?: string | null
+          image_url?: string
+          category?: string | null
+          display_order?: number | null
+          is_visible?: boolean | null
+          created_at?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       articles: {
         Row: {
           author: string

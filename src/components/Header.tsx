@@ -45,6 +45,7 @@ const Header = () => {
     { label: 'Services', action: () => scrollToSection('services'), isSection: true },
     { label: 'Doctors', action: () => scrollToSection('doctors'), isSection: true },
     { label: 'Articles', href: '/articles', isSection: false },
+    { label: 'Gallery', href: '/gallery', isSection: false },
     { label: 'Contact', action: () => scrollToSection('contact'), isSection: true },
   ];
 
@@ -117,14 +118,14 @@ const Header = () => {
                     key={item.label}
                     to={item.href!}
                     className={`relative px-4 py-2 text-body-sm font-medium transition-colors group ${
-                      location.pathname.startsWith('/articles') 
+                      location.pathname.startsWith(item.href!) 
                         ? 'text-burgundy-700' 
                         : 'text-foreground/80 hover:text-burgundy-700'
                     }`}
                   >
                     {item.label}
                     <span className={`absolute bottom-0 left-4 right-4 h-0.5 bg-burgundy-600 transition-transform origin-left ${
-                      location.pathname.startsWith('/articles') ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+                      location.pathname.startsWith(item.href!) ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
                     }`} />
                   </Link>
                 )
