@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { Search, ChevronLeft, ChevronRight, X } from 'lucide-react';
+import { useState, useEffect, useMemo } from 'react';
+import { Search, ChevronLeft, ChevronRight, X, Images } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -19,6 +19,18 @@ interface GalleryImage {
   category: string | null;
   display_order: number | null;
   is_visible: boolean | null;
+  album_id: string | null;
+  created_at: string;
+}
+
+interface Album {
+  album_id: string;
+  title: string;
+  description: string | null;
+  category: string | null;
+  cover_image: string;
+  image_count: number;
+  images: GalleryImage[];
   created_at: string;
 }
 
@@ -27,18 +39,51 @@ const Gallery = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [images, setImages] = useState<GalleryImage[]>([]);
   const [loading, setLoading] = useState(true);
-  const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null);
+  const [selectedAlbum, setSelectedAlbum] = useState<Album | null>(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Get unique categories from images
-  const allCategories = ['All', ...new Set(images.map(img => img.category).filter(Boolean) as string[])];
+  // Group images by album_id
+  const albums = useMemo(() => {
+    const albumMap = new Map<string, GalleryImage[]>();
+    
+    images.forEach(img => {
+      const albumId = img.album_id || img.id; // Use image id as album_id for single images
+      if (!albumMap.has(albumId)) {
+        albumMap.set(albumId, []);
+      }
+      albumMap.get(albumId)!.push(img);
+    });
 
-  const filteredImages = images.filter(image => {
-    const matchesSearch = image.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         (image.description?.toLowerCase().includes(searchTerm.toLowerCase()) ?? false);
-    const matchesCategory = selectedCategory === 'All' || image.category === selectedCategory;
+    const albumList: Album[] = [];
+    albumMap.forEach((albumImages, albumId) => {
+      // Sort images within album by display_order
+      albumImages.sort((a, b) => (a.display_order ?? 0) - (b.display_order ?? 0));
+      const firstImage = albumImages[0];
+      albumList.push({
+        album_id: albumId,
+        title: firstImage.title,
+        description: firstImage.description,
+        category: firstImage.category,
+        cover_image: firstImage.image_url,
+        image_count: albumImages.length,
+        images: albumImages,
+        created_at: firstImage.created_at,
+      });
+    });
+
+    return albumList.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+  }, [images]);
+
+  // Get unique categories from albums
+  const allCategories = ['All', ...new Set(albums.map(album => album.category).filter(Boolean) as string[])];
+
+  const filteredAlbums = albums.filter(album => {
+    const matchesSearch = album.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         (album.description?.toLowerCase().includes(searchTerm.toLowerCase()) ?? false);
+    const matchesCategory = selectedCategory === 'All' || album.category === selectedCategory;
     return matchesSearch && matchesCategory;
-  }).sort((a, b) => (a.display_order ?? 0) - (b.display_order ?? 0));
+  });
 
   // Fetch images from Supabase
   useEffect(() => {
@@ -48,7 +93,7 @@ const Gallery = () => {
           .from('gallery_images')
           .select('*')
           .eq('is_visible', true)
-          .order('display_order', { ascending: true });
+          .order('created_at', { ascending: false });
 
         if (error) throw error;
         setImages(data || []);
@@ -62,28 +107,27 @@ const Gallery = () => {
     fetchImages();
   }, []);
 
-  const openModal = (image: GalleryImage) => {
-    setSelectedImage(image);
+  const openModal = (album: Album) => {
+    setSelectedAlbum(album);
+    setCurrentImageIndex(0);
     setIsModalOpen(true);
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
-    setSelectedImage(null);
+    setSelectedAlbum(null);
+    setCurrentImageIndex(0);
   };
 
   const navigateImage = (direction: 'prev' | 'next') => {
-    if (!selectedImage) return;
-    const currentIndex = filteredImages.findIndex(img => img.id === selectedImage.id);
-    let newIndex: number;
+    if (!selectedAlbum) return;
+    const totalImages = selectedAlbum.images.length;
     
     if (direction === 'prev') {
-      newIndex = currentIndex > 0 ? currentIndex - 1 : filteredImages.length - 1;
+      setCurrentImageIndex(prev => prev > 0 ? prev - 1 : totalImages - 1);
     } else {
-      newIndex = currentIndex < filteredImages.length - 1 ? currentIndex + 1 : 0;
+      setCurrentImageIndex(prev => prev < totalImages - 1 ? prev + 1 : 0);
     }
-    
-    setSelectedImage(filteredImages[newIndex]);
   };
 
   // Keyboard navigation
@@ -97,7 +141,7 @@ const Gallery = () => {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isModalOpen, selectedImage, filteredImages]);
+  }, [isModalOpen, selectedAlbum]);
 
   if (loading) {
     return (
@@ -164,38 +208,45 @@ const Gallery = () => {
         </div>
       </section>
 
-      {/* Gallery Grid */}
+      {/* Gallery Grid - Albums */}
       <section className="py-12">
         <div className="container mx-auto px-4">
-          {filteredImages.length === 0 ? (
+          {filteredAlbums.length === 0 ? (
             <div className="text-center py-16">
-              <h3 className="text-2xl font-semibold text-gray-700 mb-2">No images found</h3>
+              <h3 className="text-2xl font-semibold text-gray-700 mb-2">No albums found</h3>
               <p className="text-gray-500">Try adjusting your search terms or category filter</p>
             </div>
           ) : (
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              {filteredImages.map((image, index) => (
+              {filteredAlbums.map((album, index) => (
                 <div
-                  key={image.id}
+                  key={album.album_id}
                   className="group relative aspect-square bg-gray-200 rounded-lg overflow-hidden cursor-pointer animate-fade-in hover:shadow-xl transition-all duration-300"
                   style={{ animationDelay: `${index * 50}ms` }}
-                  onClick={() => openModal(image)}
+                  onClick={() => openModal(album)}
                 >
                   <img
-                    src={image.image_url}
-                    alt={image.title}
+                    src={album.cover_image}
+                    alt={album.title}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     loading="lazy"
                   />
+                  {/* Image count badge */}
+                  {album.image_count > 1 && (
+                    <div className="absolute top-2 right-2 flex items-center gap-1 bg-black/60 text-white px-2 py-1 rounded-full text-xs">
+                      <Images size={12} />
+                      <span>{album.image_count}</span>
+                    </div>
+                  )}
                   {/* Overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <div className="absolute bottom-0 left-0 right-0 p-4">
                       <h3 className="text-white font-semibold text-sm line-clamp-1">
-                        {image.title}
+                        {album.title}
                       </h3>
-                      {image.category && (
+                      {album.category && (
                         <span className="text-white/80 text-xs">
-                          {image.category}
+                          {album.category}
                         </span>
                       )}
                     </div>
@@ -207,58 +258,99 @@ const Gallery = () => {
         </div>
       </section>
 
-      {/* Image Modal */}
+      {/* Album Modal - Warm Tibetan-inspired theme */}
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-        <DialogContent className="max-w-5xl w-[95vw] max-h-[95vh] p-0 overflow-hidden bg-black/95 border-none">
-          {selectedImage && (
+        <DialogContent className="max-w-5xl w-[95vw] max-h-[95vh] p-0 overflow-hidden bg-gradient-to-br from-amber-50 via-orange-50 to-amber-100 border-2 border-amber-200/50 shadow-2xl">
+          {selectedAlbum && (
             <div className="relative flex flex-col h-full">
+              {/* Decorative pattern overlay */}
+              <div className="absolute inset-0 opacity-5 pointer-events-none" style={{
+                backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23854d0e' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+              }} />
+              
               {/* Close button */}
               <button
                 onClick={closeModal}
-                className="absolute top-4 right-4 z-10 p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors"
+                className="absolute top-4 right-4 z-10 p-2 rounded-full bg-burgundy-800/80 text-amber-50 hover:bg-burgundy-900 transition-colors shadow-lg"
               >
                 <X size={24} />
               </button>
 
-              {/* Navigation buttons */}
-              <button
-                onClick={() => navigateImage('prev')}
-                className="absolute left-4 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors"
-              >
-                <ChevronLeft size={32} />
-              </button>
-              <button
-                onClick={() => navigateImage('next')}
-                className="absolute right-4 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors"
-              >
-                <ChevronRight size={32} />
-              </button>
+              {/* Navigation buttons - only show if more than 1 image */}
+              {selectedAlbum.image_count > 1 && (
+                <>
+                  <button
+                    onClick={() => navigateImage('prev')}
+                    className="absolute left-4 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-burgundy-800/80 text-amber-50 hover:bg-burgundy-900 transition-colors shadow-lg"
+                  >
+                    <ChevronLeft size={32} />
+                  </button>
+                  <button
+                    onClick={() => navigateImage('next')}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-burgundy-800/80 text-amber-50 hover:bg-burgundy-900 transition-colors shadow-lg"
+                  >
+                    <ChevronRight size={32} />
+                  </button>
+                </>
+              )}
 
-              {/* Image */}
-              <div className="flex-1 flex items-center justify-center p-4 pt-12">
-                <img
-                  src={selectedImage.image_url}
-                  alt={selectedImage.title}
-                  className="max-w-full max-h-[70vh] object-contain rounded-lg"
-                />
+              {/* Image container with warm shadow */}
+              <div className="flex-1 flex items-center justify-center p-6 pt-14">
+                <div className="relative">
+                  <img
+                    src={selectedAlbum.images[currentImageIndex].image_url}
+                    alt={selectedAlbum.title}
+                    className="max-w-full max-h-[65vh] object-contain rounded-lg shadow-xl ring-4 ring-amber-200/30"
+                  />
+                </div>
               </div>
 
-              {/* Image info */}
-              <div className="bg-black/80 p-6 text-white">
+              {/* Image info - warm gradient footer */}
+              <div className="bg-gradient-to-r from-burgundy-800 via-burgundy-700 to-burgundy-800 p-6 text-amber-50 border-t-4 border-amber-400/30">
                 <DialogHeader>
-                  <DialogTitle className="text-xl font-semibold text-white">
-                    {selectedImage.title}
-                  </DialogTitle>
-                  {selectedImage.description && (
-                    <DialogDescription className="text-gray-300 mt-2">
-                      {selectedImage.description}
+                  <div className="flex items-center justify-between">
+                    <DialogTitle className="text-xl font-semibold text-amber-50 font-heading">
+                      {selectedAlbum.title}
+                    </DialogTitle>
+                    {selectedAlbum.image_count > 1 && (
+                      <span className="text-amber-200 text-sm">
+                        {currentImageIndex + 1} / {selectedAlbum.image_count}
+                      </span>
+                    )}
+                  </div>
+                  {selectedAlbum.description && (
+                    <DialogDescription className="text-amber-100/90 mt-2">
+                      {selectedAlbum.description}
                     </DialogDescription>
                   )}
                 </DialogHeader>
-                {selectedImage.category && (
-                  <span className="inline-block mt-3 px-3 py-1 bg-burgundy-700 text-white text-sm rounded-full">
-                    {selectedImage.category}
+                {selectedAlbum.category && (
+                  <span className="inline-block mt-3 px-3 py-1 bg-amber-600/80 text-amber-50 text-sm rounded-full border border-amber-400/30">
+                    {selectedAlbum.category}
                   </span>
+                )}
+                
+                {/* Thumbnail strip for albums with multiple images */}
+                {selectedAlbum.image_count > 1 && (
+                  <div className="mt-4 flex gap-2 overflow-x-auto pb-2">
+                    {selectedAlbum.images.map((img, idx) => (
+                      <button
+                        key={img.id}
+                        onClick={() => setCurrentImageIndex(idx)}
+                        className={`flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-all ${
+                          idx === currentImageIndex 
+                            ? 'border-amber-400 ring-2 ring-amber-400/50' 
+                            : 'border-transparent opacity-60 hover:opacity-100'
+                        }`}
+                      >
+                        <img
+                          src={img.image_url}
+                          alt={`Thumbnail ${idx + 1}`}
+                          className="w-full h-full object-cover"
+                        />
+                      </button>
+                    ))}
+                  </div>
                 )}
               </div>
             </div>

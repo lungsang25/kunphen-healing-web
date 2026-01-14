@@ -23,6 +23,7 @@ export type Database = {
           category: string | null
           display_order: number | null
           is_visible: boolean | null
+          album_id: string | null
           created_at: string
           updated_at: string
         }
@@ -34,6 +35,7 @@ export type Database = {
           category?: string | null
           display_order?: number | null
           is_visible?: boolean | null
+          album_id?: string | null
           created_at?: string
           updated_at?: string
         }
@@ -45,6 +47,7 @@ export type Database = {
           category?: string | null
           display_order?: number | null
           is_visible?: boolean | null
+          album_id?: string | null
           created_at?: string
           updated_at?: string
         }
